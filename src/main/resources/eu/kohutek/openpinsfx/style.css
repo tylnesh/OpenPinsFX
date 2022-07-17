@@ -1,0 +1,26 @@
+.background {
+    -fx-background-color: lightgray;
+
+}
+
+.game-chooser-category {
+
+}
+
+.game-chooser-label {
+    -fx-font-size: 48px;
+    -fx-font-family: "Helvetica Neue";
+    -fx-font-weight: bolder;
+}
+.game-chooser-button {
+    -fx-min-width: 400px;
+    -fx-font-size: 48px;
+    -fx-font-family: Helvetica;
+    -fx-font-weight: bolder;
+    -fx-padding: 30;
+    -fx-text-fill: white;
+    -fx-background-color: #555555;
+    -fx-border-color: black;
+    -fx-border-width: 10;
+
+}

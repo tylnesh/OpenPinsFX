@@ -2,23 +2,52 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="eu.kohutek.openpinsfx.MainWindow">
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.control.Label?>
+<HBox fx:id="mainBox" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="eu.kohutek.openpinsfx.gui.MainWindow">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+        <Insets bottom="20.0" left="200.0" right="20.0" top="20.0"/>
     </padding>
+    <children>
+        <VBox alignment="CENTER" spacing="20.0">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
 
-    <Button fx:id="firstLaneButton">Plná hra
-    </Button>
 
-    <Button fx:id="secondLaneButton">Dorážka
-    </Button>
-   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-<!--      <image>-->
-<!--         <Image url="@images/logo.png" />-->
-<!--      </image>-->
-   </ImageView>
-</VBox>
+            <VBox styleClass="game-chooser-category" spacing="10">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <Button fx:id="tournamentButton" styleClass="game-chooser-button">Turnaj
+                </Button>
+            </VBox>
+            <VBox styleClass="game-chooser-category" spacing="10">
+                <padding>
+                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+                </padding>
+                <Label styleClass="game-chooser-label">Samostatná hra</Label>
+                <Button fx:id="firstLaneButton">Plná hra
+                </Button>
+
+                <Button fx:id="secondLaneButton">Dorážka
+                </Button>
+
+                <Button fx:id="customGameButton">Tréning
+                </Button>
+            </VBox>
+
+        </VBox>
+        <ImageView fx:id="imageView" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+        </ImageView>
+    </children>
+</HBox>
