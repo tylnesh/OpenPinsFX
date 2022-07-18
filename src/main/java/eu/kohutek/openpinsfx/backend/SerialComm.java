@@ -7,8 +7,9 @@ import java.util.Arrays;
 public class SerialComm {
     SerialPort comPort;
     public SerialComm() {
-        comPort = SerialPort.getCommPorts()[6];
         System.out.println(Arrays.stream(SerialPort.getCommPorts()).toList());
+
+        comPort = SerialPort.getCommPorts()[1];
         System.out.println(comPort.getDescriptivePortName());
         comPort.openPort();
         comPort.addDataListener(new SerialPortDataListener() {

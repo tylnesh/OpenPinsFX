@@ -24,3 +24,4 @@ public class GameStatus {
         pinState = new boolean[]{false, false, false, false, false, false, false, false, false};
     }
 }
+
