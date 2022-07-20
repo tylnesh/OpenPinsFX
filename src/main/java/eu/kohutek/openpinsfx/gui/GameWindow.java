@@ -39,14 +39,13 @@ public class GameWindow {
         System.out.println(gameType);
     }
     public void initialize(){
-        SerialComm comm = new SerialComm();
+        //SerialComm comm = new SerialComm();
         gameStatus = new GameStatus();
         mainPane.getStylesheets().add(OpenPinsFX.class.getResource("style.css").toString());
-
         ArrayList<ImageView> pinsViews = generatePinsViews();
-       pinGrid.setMaxWidth(640);
-       pinGrid.setMaxHeight(480);
-       populatePinGrid(pinsViews);
+        pinGrid.setMaxWidth(640);
+        pinGrid.setMaxHeight(480);
+        populatePinGrid(pinsViews);
     }
 
     private void populatePinGrid(ArrayList<ImageView> pinsViews) {

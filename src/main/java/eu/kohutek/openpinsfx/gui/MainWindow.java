@@ -48,7 +48,6 @@ public void initialize(){
 
 
         //GameWindow controller
-
         //OpenPinsFX.setScene("game-view.fxml");
 
 

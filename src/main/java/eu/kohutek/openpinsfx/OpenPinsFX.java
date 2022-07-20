@@ -1,5 +1,6 @@
 package eu.kohutek.openpinsfx;
 
+import eu.kohutek.openpinsfx.backend.SerialComm;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,8 +12,10 @@ import java.io.IOException;
 public class OpenPinsFX extends Application {
     static FXMLLoader fxmlLoader;
     static Scene scene;
+    static SerialComm comm;
     @Override
     public void start(Stage stage) throws IOException {
+        comm = new SerialComm();
         fxmlLoader = new FXMLLoader(OpenPinsFX.class.getResource("main-view.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         stage.setTitle("OpenPinsFX - Free and Open Source Ninepins Game");
