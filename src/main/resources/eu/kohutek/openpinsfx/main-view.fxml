@@ -12,6 +12,7 @@
 
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ChoiceBox?>
 <HBox fx:id="mainBox" alignment="CENTER_LEFT" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="eu.kohutek.openpinsfx.gui.MainWindow">
     <padding>
@@ -47,6 +48,9 @@
             </VBox>
 
         </VBox>
+        <ChoiceBox fx:id="serialPortChoiceBox">
+        </ChoiceBox>
+
         <ImageView fx:id="imageView" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
         </ImageView>
     </children>

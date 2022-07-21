@@ -31,3 +31,4 @@ public class GameStatus {
         this.time = LocalDateTime.now();
     }
 }
+

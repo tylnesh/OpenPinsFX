@@ -2,6 +2,7 @@ package eu.kohutek.openpinsfx.gui;
 
 import eu.kohutek.openpinsfx.OpenPinsFX;
 import eu.kohutek.openpinsfx.backend.GameStatus;
+import eu.kohutek.openpinsfx.backend.GameType;
 import eu.kohutek.openpinsfx.backend.SerialComm;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 public class GameWindow {
 
     private GameStatus gameStatus;
+    private GameType gameType;
 
 
 
@@ -27,18 +29,23 @@ public class GameWindow {
     @FXML
     Button pinSetupButton;
 
-    Image pinStanding = new Image(OpenPinsFX.class.getResource("pinStanding.png").toString());
-    Image pinHit = new Image(OpenPinsFX.class.getResource("pinHit.png").toString());
+    Image pinStanding = new Image(OpenPinsFX.class.getResource("images/pinStanding.png").toString());
+    Image pinHit = new Image(OpenPinsFX.class.getResource("images/pinHit.png").toString());
 
+
+
+    public void initData(GameType type) {
+        gameType = type;
+        System.out.println(gameType);
+    }
     public void initialize(){
         //SerialComm comm = new SerialComm();
         gameStatus = new GameStatus();
         mainPane.getStylesheets().add(OpenPinsFX.class.getResource("style.css").toString());
-
         ArrayList<ImageView> pinsViews = generatePinsViews();
-       pinGrid.setMaxWidth(640);
-       pinGrid.setMaxHeight(480);
-       populatePinGrid(pinsViews);
+        pinGrid.setMaxWidth(640);
+        pinGrid.setMaxHeight(480);
+        populatePinGrid(pinsViews);
     }
 
     private void populatePinGrid(ArrayList<ImageView> pinsViews) {
