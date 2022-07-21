@@ -23,4 +23,11 @@ public class GameStatus {
         time = LocalDateTime.now();
         pinState = new boolean[]{false, false, false, false, false, false, false, false, false};
     }
+    public void updateGameStatus(GameStatus gs) {
+        this.setRound(gs.getRound());
+        this.setBallsThrown(gs.getBallsThrown());
+        this.setScore(gs.getScore());
+        this.setPinState(gs.getPinState());
+        this.time = LocalDateTime.now();
+    }
 }
