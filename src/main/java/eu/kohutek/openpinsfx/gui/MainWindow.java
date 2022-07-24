@@ -1,17 +1,20 @@
 package eu.kohutek.openpinsfx.gui;
 
+import com.fazecast.jSerialComm.SerialPort;
 import eu.kohutek.openpinsfx.OpenPinsFX;
 import eu.kohutek.openpinsfx.backend.GameType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainWindow {
     @FXML
@@ -21,6 +24,9 @@ public class MainWindow {
 @FXML Button customGameButton;
 @FXML
 ImageView imageView;
+
+@FXML
+    ChoiceBox serialPortChoiceBox;
 
 
 
@@ -65,6 +71,18 @@ public void initialize(){
 
     Image img = new Image(OpenPinsFX.class.getResource("images/logo.png").toString());
     imageView.setImage(img);
+
+    List<SerialPort> serialPorts = OpenPinsFX.getSerialInstance().getPorts();
+    serialPortChoiceBox.getItems().addAll(serialPorts);
+    serialPortChoiceBox.setOnAction(e -> {
+        OpenPinsFX.getSerialInstance().establishConnection(serialPorts.get(serialPortChoiceBox.getSelectionModel().getSelectedIndex()));
+        System.out.println(serialPortChoiceBox.getValue());
+
+    });
+
+
+
+
 
 
 }

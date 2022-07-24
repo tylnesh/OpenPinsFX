@@ -7,10 +7,28 @@
 
 }
 
+.serial-port-choicebox {
+    -fx-background-color: lightgray;
+    -fx-font-size: 24px;
+    -fx-text-fill: #ffffff;
+    -fx-min-width: 420px;
+}
+
+.serial-port-choicebox .menu-item:focused {
+    -fx-background-color: darkgray ;
+    -fx-text-fill: black;
+}
+
+.serial-port-choicebox .context-menu {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+}
+
 .game-chooser-label {
     -fx-font-size: 48px;
     -fx-font-family: "Helvetica Neue";
     -fx-font-weight: bolder;
+
 }
 .game-chooser-button {
     -fx-min-width: 400px;
