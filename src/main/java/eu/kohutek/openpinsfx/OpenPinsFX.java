@@ -36,4 +36,8 @@ public class OpenPinsFX extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public static SerialComm getSerialInstance() {
+        return comm;
+    }
 }

@@ -43,5 +43,40 @@ public class SerialComm {
         List<SerialPort> portsList = Arrays.stream(comPort.getCommPorts()).toList();
         return portsList;
     }
+
+    public void establishConnection (SerialPort serialPort) {
+        comPort = serialPort;
+        comPort.openPort();
+        comPort.addDataListener(new SerialPortDataListener() {
+
+            @Override
+            public int getListeningEvents() { return SerialPort.LISTENING_EVENT_DATA_AVAILABLE; }
+            @Override
+            public void serialEvent(SerialPortEvent event)
+            {
+                if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+                    return;
+
+//                if (comPort.bytesAvailable() > 6)
+//                {
+//                    byte[] newData = new byte[comPort.bytesAvailable()];
+//                    int numRead = comPort.readBytes(newData, newData.length);
+//                    System.out.println("Read " + numRead + " bytes.");
+//                    for (byte b:newData){
+//                        System.out.print((char) b);
+//                    }
+//                }
+                while (comPort.bytesAvailable()>0) {
+                    byte[] newData = new byte[comPort.bytesAvailable()];
+                    int numRead = comPort.readBytes(newData, newData.length);
+                    //System.out.println("Read " + numRead + " bytes.");
+                    for (byte b:newData){
+                        System.out.print((char) b);
+                    }
+                }
+
+            }
+        });
+    }
 }
 
