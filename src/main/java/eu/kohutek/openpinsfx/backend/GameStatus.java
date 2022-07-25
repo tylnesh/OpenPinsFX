@@ -19,6 +19,7 @@ public class GameStatus {
 
 
 
+
     public GameStatus() {
         round = 0;
         ballsThrown = 0;
@@ -41,7 +42,7 @@ public class GameStatus {
                 "round=" + round +
                 ", ballsThrown=" + ballsThrown +
                 ", score=" + score +
-                //", time=" + time +
+                ", time=" + time +
                 ", pinState=" + Arrays.toString(pinState) +
                 '}';
     }
