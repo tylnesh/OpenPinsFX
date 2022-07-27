@@ -28,8 +28,19 @@
     -fx-font-size: 48px;
     -fx-font-family: "Helvetica Neue";
     -fx-font-weight: bolder;
-
 }
+
+.score-panel-label {
+    -fx-font-size: 48px;
+    -fx-font-family: "Helvetica Neue";
+}
+
+.score-panel-value {
+    -fx-font-size: 48px;
+    -fx-font-weight: bolder;
+    -fx-font-family: "TlwgTypewriter";
+}
+
 .game-chooser-button {
     -fx-min-width: 400px;
     -fx-font-size: 36px;
