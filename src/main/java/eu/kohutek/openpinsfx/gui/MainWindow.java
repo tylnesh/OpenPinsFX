@@ -41,22 +41,15 @@ public void initialize(){
         try {
             Stage newStage = new Stage();
             Scene scene = new Scene(loader.load());
-            //OpenPinsFX.setScene(loader.load());
             GameWindow controller = loader.getController();
             controller.initData(GameType.FULLGAME);
             newStage.setTitle("Plna hra");
             newStage.setScene(scene);
             newStage.show();
-
+            OpenPinsFX.getSerialInstance().setActiveWindow(controller);
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-
-
-        //GameWindow controller
-        //OpenPinsFX.setScene("game-view.fxml");
-
-
     });
 
     secondLaneButton.getStyleClass().add("game-chooser-button");
@@ -79,11 +72,7 @@ public void initialize(){
         System.out.println(serialPortChoiceBox.getValue());
 
     });
-
-
-
-
-
-
 }
+
+
 }

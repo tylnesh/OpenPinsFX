@@ -2,8 +2,13 @@ package eu.kohutek.openpinsfx.gui;
 
 import eu.kohutek.openpinsfx.OpenPinsFX;
 import eu.kohutek.openpinsfx.backend.GameStatus;
+import eu.kohutek.openpinsfx.backend.GameStatusProperty;
 import eu.kohutek.openpinsfx.backend.GameType;
 import eu.kohutek.openpinsfx.backend.SerialComm;
+import javafx.application.Platform;
+import javafx.beans.binding.StringBinding;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,28 +16,32 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.StringConverter;
 
 import java.util.ArrayList;
 
 public class GameWindow {
 
-    private GameStatus gameStatus;
     private GameType gameType;
 
 
+    private SerialComm comm;
 
     @FXML
     GridPane pinGrid;
     @FXML
     BorderPane mainPane;
-
     @FXML
     Button pinSetupButton;
+
+    @FXML Label throwsPanel;
+    @FXML Label scorePanel;
+    @FXML Label pinsPanel;
 
     Image pinStanding = new Image(OpenPinsFX.class.getResource("images/pinStanding.png").toString());
     Image pinHit = new Image(OpenPinsFX.class.getResource("images/pinHit.png").toString());
 
-
+    private static GameStatusProperty statusProperty = OpenPinsFX.getStatusPropInstance();
 
     public void initData(GameType type) {
         gameType = type;
@@ -40,12 +49,17 @@ public class GameWindow {
     }
     public void initialize(){
         //SerialComm comm = new SerialComm();
-        gameStatus = new GameStatus();
         mainPane.getStylesheets().add(OpenPinsFX.class.getResource("style.css").toString());
         ArrayList<ImageView> pinsViews = generatePinsViews();
         pinGrid.setMaxWidth(640);
         pinGrid.setMaxHeight(480);
         populatePinGrid(pinsViews);
+
+        throwsPanel.textProperty().bind(statusProperty.getBallsThrown().asString());
+        scorePanel.textProperty().bind(statusProperty.getScore().asString());
+        //pinsPanel.textProperty().bind()
+
+
     }
 
     private void populatePinGrid(ArrayList<ImageView> pinsViews) {
@@ -71,4 +85,6 @@ public class GameWindow {
         }
         return pinsView;
     }
+
+
 }
