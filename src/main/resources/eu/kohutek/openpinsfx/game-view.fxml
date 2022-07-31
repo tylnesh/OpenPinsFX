@@ -56,20 +56,15 @@
             </padding>
             <VBox>
                 <Label styleClass="score-panel-label">Počet hodov</Label>
-                <Label fx:id="throwsPanel" styleClass="score-panel-value">000</Label>
-
+                <Label fx:id="throwsPanel" styleClass="score-panel-value" text="000"></Label>
             </VBox>
             <VBox>
                 <Label styleClass="score-panel-label">Zhodené kolky</Label>
-                <Label fx:id="pinPanel" styleClass="score-panel-value">000</Label>
-
-
+                <Label fx:id="pinsPanel" styleClass="score-panel-value">000</Label>
             </VBox>
             <VBox>
                 <Label styleClass="score-panel-label">Skóre</Label>
                 <Label fx:id="scorePanel" styleClass="score-panel-value">000</Label>
-
-
             </VBox>
 
         </HBox>
