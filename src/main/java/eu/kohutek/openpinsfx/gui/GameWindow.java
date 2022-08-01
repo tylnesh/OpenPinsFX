@@ -18,6 +18,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.StringConverter;
 
+import javax.swing.event.DocumentEvent;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 
 public class GameWindow {
@@ -38,10 +40,11 @@ public class GameWindow {
     @FXML Label scorePanel;
     @FXML Label pinsPanel;
 
-    Image pinStanding = new Image(OpenPinsFX.class.getResource("images/pinStanding.png").toString());
-    Image pinHit = new Image(OpenPinsFX.class.getResource("images/pinHit.png").toString());
+    static Image pinStanding = new Image(OpenPinsFX.class.getResource("images/pinStanding.png").toString());
+    static Image pinHit = new Image(OpenPinsFX.class.getResource("images/pinHit.png").toString());
 
     private static GameStatusProperty statusProperty = OpenPinsFX.getStatusPropInstance();
+    static ArrayList<ImageView> pinsViews;
 
     public void initData(GameType type) {
         gameType = type;
@@ -50,13 +53,15 @@ public class GameWindow {
     public void initialize(){
         //SerialComm comm = new SerialComm();
         mainPane.getStylesheets().add(OpenPinsFX.class.getResource("style.css").toString());
-        ArrayList<ImageView> pinsViews = generatePinsViews();
+        pinsViews = generatePinsViews();
         pinGrid.setMaxWidth(640);
         pinGrid.setMaxHeight(480);
         populatePinGrid(pinsViews);
 
         throwsPanel.textProperty().bind(statusProperty.getBallsThrown().asString());
         scorePanel.textProperty().bind(statusProperty.getScore().asString());
+        statusProperty.getBallsThrown().addListener(GameWindow::changed);
+
         //pinsPanel.textProperty().bind()
 
 
@@ -70,20 +75,40 @@ public class GameWindow {
         pinGrid.addRow(4,new Label(""),new Label(""), pinsViews.get(8),new Label(""),new Label(""));
     }
 
+
+
     private ArrayList<ImageView> generatePinsViews() {
         ArrayList<ImageView> pinsView = new ArrayList<>();
         for (int i = 0; i< 9; i++) {
             ImageView imgView = new ImageView(pinStanding);
-            imgView.setOnMouseClicked( e -> {
-                if (imgView.getImage().equals(pinStanding)) {
-                    imgView.setImage(pinHit);
-                } else {
-                    imgView.setImage(pinStanding);
-                }
-            });
+//            imgView.setOnMouseClicked( e -> {
+//                if (imgView.getImage().equals(pinStanding)) {
+//                    imgView.setImage(pinHit);
+//                } else {
+//                    imgView.setImage(pinStanding);
+//                }
+//            });
             pinsView.add(imgView);
         }
         return pinsView;
+    }
+
+    private static void updatePinsViews() {
+        for (int i = 0; i<9; i++) {
+            System.out.println(statusProperty.getPinState()[i]);
+            if (statusProperty.getPinState()[i]) {
+                pinsViews.get(i).setImage(pinHit);
+            } else {
+                pinsViews.get(i).setImage(pinStanding);
+            }
+        }
+    }
+
+    public static void changed(ObservableValue<? extends Number> prop,
+                               Number oldValue,
+                               Number newValue) {
+        System.out.println("updating pins");
+        updatePinsViews();
     }
 
 

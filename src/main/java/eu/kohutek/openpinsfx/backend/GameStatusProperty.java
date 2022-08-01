@@ -19,17 +19,14 @@ public class GameStatusProperty {
     private IntegerProperty score;
     @JsonIgnore
     private LocalDateTime time;
-    private BooleanProperty[] pinState;
-
+    private boolean[] pinState;
     public GameStatusProperty() {
         this.round = new SimpleIntegerProperty(0);
         this.ballsThrown = new SimpleIntegerProperty(0);
         this.score = new SimpleIntegerProperty(0);
         this.time = LocalDateTime.now();
-        this.pinState = new BooleanProperty[9];
-        for (int i = 0; i< 9; i++) {
-            this.pinState[i] = new SimpleBooleanProperty(false);
-        }
+        this.pinState = new boolean[]{false, false, false, false, false, false, false, false, false};
+
 
     }
 
@@ -39,9 +36,10 @@ public class GameStatusProperty {
         this.ballsThrown.set(gs.getBallsThrown());
         this.score.set(gs.getScore());
         for (int i = 0; i<9;i++) {
-            this.pinState[i] = new SimpleBooleanProperty(gs.getPinState()[i]);
+            this.pinState[i] = gs.getPinState()[i];
         }
         this.time = gs.getTime();
+        System.out.println(this);
     }
 
 
