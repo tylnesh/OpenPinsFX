@@ -52,6 +52,8 @@ public class GameWindow {
     }
     public void initialize(){
         //SerialComm comm = new SerialComm();
+        comm = OpenPinsFX.getSerialInstance();
+        //comm.sendMessage(new Message());
         mainPane.getStylesheets().add(OpenPinsFX.class.getResource("style.css").toString());
         pinsViews = generatePinsViews();
         pinGrid.setMaxWidth(640);
@@ -63,6 +65,10 @@ public class GameWindow {
         statusProperty.getBallsThrown().addListener(GameWindow::changed);
 
         //pinsPanel.textProperty().bind()
+
+        pinSetupButton.setOnAction(e -> {
+            comm.sendNumber(1);
+        });
 
 
     }

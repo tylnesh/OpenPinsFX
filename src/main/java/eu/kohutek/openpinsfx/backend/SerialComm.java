@@ -1,4 +1,5 @@
 package eu.kohutek.openpinsfx.backend;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 import java.io.Serial;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +48,36 @@ public class SerialComm {
         comPort.openPort();
         MessageListener listener = new MessageListener();
         comPort.addDataListener(listener);
+    }
+
+//    public int sendMessage(Message message){
+//        byte[] messageBytes =
+//
+//        comPort.
+//    }
+    public void sendNumber(int number) {
+        byte[] numberAsByte = new byte[]{ (byte) number};
+        comPort.writeBytes(numberAsByte, numberAsByte.length);
+    }
+
+    public int sendBytes(byte[] bytes) {
+        return comPort.writeBytes(bytes, bytes.length);
+    }
+
+    public void sendMessageAsBytes(Message msg) {
+        msg.setTimestamp(System.currentTimeMillis());
+        try {
+            byte[] payload = new ObjectMapper().writeValueAsString(msg.getGameStatus()).getBytes(StandardCharsets.UTF_8);
+            int bufferSize = payload.length + 8 + 4;
+            byte[] msgAsBytes = ByteBuffer.allocate(bufferSize).putLong(msg.getTimestamp()).putInt(msg.getCommand().ordinal()).put(payload).array();
+            comPort.writeBytes(msgAsBytes,msgAsBytes.length);
+            long timeout = msg.getTimestamp() + 100;
+            while (System.currentTimeMillis() < timeout) {
+                
+            }
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void closeConnection() {
